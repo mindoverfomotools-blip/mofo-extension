@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>MOFO demo</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+  /* A stand-in for a fomo.family token page: header with the stats strip, the chart, the buy box. Only the MOFO
+     parts are real (panel.js, overlay.js, engine.js); the chart canvas mimics what tv.js draws on TradingView. */
+  html, body { margin: 0; height: 100%; background: #060510; color: #d6d4e6; font: 13px/1.4 -apple-system, BlinkMacSystemFont, Inter, sans-serif; overflow: hidden; }
+  .top { display: flex; align-items: center; height: 64px; padding: 0 20px; border-bottom: 1px solid #1c1a2e; }
+  .namebox { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .logo { width: 34px; height: 34px; border-radius: 50%; background: #2a2744; }
+  .namebox b { font-size: 16px; color: #EAEDFF; } .namebox span { color: #8d89a8; }
+  .no-scrollbar { flex: 1; min-width: 0; display: flex; }
+  .ml-auto { margin-left: auto; display: flex; gap: 22px; }
+  .ml-auto > div { display: flex; flex-direction: column; gap: 2px; }
+  .ml-auto > div > div:first-child { color: #8d89a8; font-size: 11px; } .ml-auto > div > div:last-child { color: #EAEDFF; font-weight: 600; }
+  .main { display: flex; height: calc(100% - 65px - 46px); }
+  .demo { height: 46px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #EAEDFF; color: #0B091F; font: 600 12px/1.2 'MOFO Martian', monospace; letter-spacing: .04em; overflow-x: auto; white-space: nowrap; }
+  .demo b { font: 900 13px/1 'MOFO Archivo', sans-serif; letter-spacing: .08em; background: #0B091F; color: #EAEDFF; padding: 5px 7px 4px; }
+  .demo .sp { flex: 1; min-width: 8px; }
+  @media (max-width: 1400px) { .demo .msg { display: none; } }
+  .demo a { flex-shrink: 0; color: #0B091F; text-decoration: none; padding: 6px 7px 5px; box-shadow: inset 0 0 0 1px #0B091F; text-transform: uppercase; font-size: 10.5px; letter-spacing: .1em; }
+  .demo a.on { background: #0B091F; color: #EAEDFF; }
+  .chartbox { flex: 1; min-width: 0; position: relative; }
+  canvas { display: block; width: 100%; height: 100%; }
+  .side { width: 360px; flex-shrink: 0; border-left: 1px solid #1c1a2e; padding: 18px; }
+  .buybox { display: flex; flex-direction: column; }
+  .buybox label { color: #8d89a8; font-size: 12px; margin-bottom: 6px; }
+  .buybox input { background: #12101f; color: #EAEDFF; border: 1px solid #262340; border-radius: 10px; padding: 12px; font: 600 16px/1 Inter, sans-serif; margin-bottom: 10px; }
+  .buybox button { background: #6b5cff; color: #EAEDFF; border: 0; border-radius: 12px; padding: 14px; font: 700 15px/1 Inter, sans-serif; }
+</style>
+</head>
+<body>
+<div class="demo"><b>DEMO</b><span class="msg">sample data on a made-up token</span><span class="sp"></span>
+  <a href="?heat=calm">calm</a><a href="?heat=hot">hot</a><a href="?heat=extreme">extreme</a><a href="?heat=hot&amp;pos=1">in a position</a><a href="?heat=hot&amp;chat=1">ask mofo</a><a href="?heat=hot&amp;call=ask">the call</a><a href="?heat=hot&amp;colors=greenred">green / red</a></div>
+<div class="top">
+  <div class="namebox"><div class="logo"></div><div><b>PEPE2</b> <span>Pepe Two</span></div></div>
+  <div class="no-scrollbar"><div class="ml-auto">
+    <div><div>Market cap</div><div>$1.24M</div></div>
+    <div><div>Price</div><div>$0.00124</div></div>
+    <div><div>24H</div><div>+212%</div></div>
+    <div><div>Liquidity</div><div>$88.1K</div></div>
+    <div><div>Holders</div><div>2,904</div></div>
+  </div></div>
+</div>
+<div class="main">
+  <div class="chartbox"><canvas id="cv"></canvas></div>
+  <div class="side"><div class="buybox"><label>Amount</label><input id="amt" value="$750"><button id="buy">Buy PEPE2</button></div></div>
+</div>
+<script src="src/engine.js"></script>
+<script src="src/tv.js"></script>
+<script src="src/holders.js"></script>
+<script src="src/score-model.js"></script>
+<script src="src/panel.js"></script>
+<script src="src/overlay.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>
